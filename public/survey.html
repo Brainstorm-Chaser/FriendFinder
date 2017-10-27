@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Survey</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container">   
+      <h1>Survey Questions</h1>
+      <hr>
+      <h2>Answer a few basic questions</h2>
+      <br>
+      <h2>Then find the friend with the best compatability</h2>
+      <br>
+      <form id="user-form" action="" method="post">
+       <div class="form-group">
+        <label for="name">Name (Required) </label>
+        <input type="name" class="form-control" id="nameInput">
+       </div>
+       <div class="form-group">
+        <label for="photoLink">Link to Photo Image (Required)</label>
+        <input type="photo" class="form-control" id="photoInput">
+       </div>
+  
+      <div class="form-group">
+       <label for="name" id='submit-btn'>Question 1: </label> 
+       <select class="form-control answer" name="question1">
+        <option>1 (Strongly Disagree)</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5 (Strongly Agree)</option>
+       </select>
+       <br>
+
+
+       <label for="name" >Question 2: </label> 
+       <select class="form-control answer" name="question2">
+        <option>1 (Strongly Disagree)</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5 (Strongly Agree)</option>
+       </select>
+       <br>
+      </div>
+
+       <input class="" type="submit" value="Submit">
+     </form>
+    </div>
+
+
+  <script type="text/javascript">
+    
+         $("#user-form").submit(function(event) {
+          event.preventDefault();
+           // var answerElements =  $('.answer')
+           // console.log('answer elements returned from jquery,', answerElements)
+
+           // var answers = answerElements.map( function(index, answerVal) {
+           //  console.log('Answer in map:: ', answerVal)
+           //  console.log('index? ;', index)
+           //  return {answer: index+1, value: answerVal.value}
+           // })
+           var answers = []
+           $('.answer').each(function(index){
+            // console.log('ITEM :: ', $( this ) );
+            answers.push( $(this).val()[0] )
+           })
+
+           // console.log("answers: ", answers)
+
+           // these answers are the first group of numbers I want to then compare to the numbers of a second array - friendsNumArray?
+           var newFriend = {
+            friendName : $('#nameInput').val().trim(),
+            friendPhoto : $('#photoInput').val().trim(),
+            answers : answers            
+           }
+           // console.log(newFriend);
+
+           $.post("/survey", newFriend, function(data){
+            // console.log(data)
+            // friends.push(data);
+
+            // $("#nameInput").val().trim("");
+            // $("#photoInput").val().trim("");
+           })
+        });
+
+
+    
+
+
+
+  </script>
+
+</body>
+</html>
