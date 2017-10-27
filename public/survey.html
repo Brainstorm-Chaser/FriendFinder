@@ -84,13 +84,13 @@
            }
            // console.log(newFriend);
 
-           $.post("/survey", newFriend, function(data){
-            // console.log(data)
-            // friends.push(data);
+           $.post("/api/new", newFriend, function(data){
+            console.log(data)
+            alert("adding friend....")
 
             // $("#nameInput").val().trim("");
             // $("#photoInput").val().trim("");
-           })
+           });
         });
 
 
